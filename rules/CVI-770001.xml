@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="URL跳转(Spring setHeader Location)"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[\.setHeader\(\"Location\"]]></match>
+    <match2 block="in-file-up"><![CDATA[(org\.springframework\.web\.bind\.annotation)]]></match2>
+    <level value="4"/>
+    <solution><![CDATA[
+        ## 安全风险
+        URL跳转漏洞
+
+        ### 形成原理
+        信任了用户输入的URL，而最终响应30x跳转
+
+        ### 风险
+]]>
+    </solution>
+    <test>
+        <case assert="true"><![CDATA[
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+    @RequestMapping("/setHeader")
+    @ResponseBody
+    public static void setHeader(HttpServletRequest request, HttpServletResponse response){
+        String url = request.getParameter("url");
+        response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY); // 301 redirect
+        response.setHeader("Location", url);
+    }
+        ]]></case>
+    </test>
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
