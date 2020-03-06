@@ -3,7 +3,7 @@
         <name value="URL#openStream/getContent的SSRF"/>
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[new\s*URL\(.*\)]]></match> <!-- 先判断new URL的参数可控-->
-    <match2  block="in-function-down"><![CDATA[\.openStream\(]]></match2>  <!-- 发起HTTP/DNS请求-->
+    <match2  block="in-function-down"><![CDATA[\.openStream\(|\.getContent\(]]></match2>  <!-- 发起HTTP/DNS请求-->
     <level value="6"/>
     <test>
         <case assert="true"><![CDATA[
