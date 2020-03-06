@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cobra document="https://github.com/WhaleShark-Team/cobra">
-    <name value="URLConnection/HttpURLConnection等由于new URL参数可控导致的SSRF"/>
+    <name value="URLConnection/HttpURLConnection的SSRF"/>
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[new\s*URL\(.*\)]]></match> <!-- 先判断new URL的参数可控-->
     <match2  block="in-function-down"><![CDATA[\.getInputStream\(|\.getLastModified\(|\.connect\(]]></match2>  <!-- 发起HTTP/DNS请求-->
@@ -18,7 +18,11 @@
             URLConnection urlConnection =  new URL(url).openConnection();
             urlConnection.getInputStream();                  // 发起HTTP请求
         ]]></case>
-
+        <case assert="true"><![CDATA[
+            String url = request.getParameter("url");
+            URLConnection urlConnection =  new URL(url).openConnection();
+            urlConnection.getLastModified();                  // 发起HTTP请求
+        ]]></case>
         <case assert="false"><![CDATA[
             String url = request.getParameter("url");
             URL u = new URL(url);
