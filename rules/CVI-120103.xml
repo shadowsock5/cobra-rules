@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cobra document="https://github.com/WhaleShark-Team/cobra">
-    <name value="URL#openStream由于new URL参数可控导致的SSRF"/>
+        <name value="URL#openStream/getContent的SSRF"/>
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[new\s*URL\(.*\)]]></match> <!-- 先判断new URL的参数可控-->
     <match2  block="in-function-down"><![CDATA[\.openStream\(]]></match2>  <!-- 发起HTTP/DNS请求-->
@@ -10,7 +10,13 @@
             String url = request.getParameter("url");
             InputStream inputStream = null;
             URL u = new URL(url);
-            inputStream = u.openStream(); // send request
+            inputStream = u.openStream(); // 发起请求
+        ]]></case>
+        <case assert="true"><![CDATA[
+            String url = request.getParameter("url");
+            InputStream inputStream = null;
+            URL u = new URL(url);
+            inputStream = u.getContent(); // 发起请求
         ]]></case>
         <case assert="false"><![CDATA[
             String url = request.getParameter("url");
