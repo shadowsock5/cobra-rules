@@ -3,7 +3,7 @@
     <name value="URLConnection/HttpURLConnection等由于new URL参数可控导致的SSRF"/>
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[new\s*URL\(.*\)]]></match> <!-- 先判断new URL的参数可控-->
-    <match2  block="in-function-down"><![CDATA[\.getInputStream\(|\.connect\(]]></match2>  <!-- 发起HTTP/DNS请求-->
+    <match2  block="in-function-down"><![CDATA[\.getInputStream\(|\.getLastModified\(|\.connect\(]]></match2>  <!-- 发起HTTP/DNS请求-->
     <level value="6"/>
     <test>
         <case assert="true"><![CDATA[
