@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="SSRF(Spring RestTemplate postForObject)"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[\.postForObject\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(org\.springframework\.web\.client\.RestTemplate)]]></match2>
+    <level value="4"/>
+    <solution><![CDATA[
+        ## 安全风险
+        URL跳转漏洞
+
+        ### 形成原理
+        信任了用户输入的URL，而最终响应30x跳转
+
+        ### 风险
+]]>
+    </solution>
+    <test>
+        <case assert="true"><![CDATA[
+import org.springframework.web.client.RestTemplate;
+
+    public static String postImg(String url, byte[] bytesArray) {
+        try {
+            RestTemplate restTemplate =  new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "binary/octet-stream");
+            HttpEntity<ByteArrayResource> formEntity = new HttpEntity<>(new ByteArrayResource(bytesArray), headers);
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+            URI uri = builder.build(true).toUri();
+            return restTemplate.postForObject(uri, formEntity, String.class);
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return null;
+    }
+
+        ]]></case>
+    </test>
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
