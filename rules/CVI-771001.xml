@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="XStream反序列化RCE"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[\.fromXML\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(com\.thoughtworks\.xstream\.XStream)]]></match2>
+    <level value="8"/>
+    <solution><![CDATA[
+        ## 安全风险
+        URL跳转漏洞
+
+        ### 形成原理
+        信任了用户输入的URL，而最终响应30x跳转
+
+        ### 风险
+]]>
+    </solution>
+    <test>
+        <case assert="true"><![CDATA[
+import javax.servlet.http.HttpServletRequest;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
+    @PostMapping("/xstream")
+    public String parseXml(HttpServletRequest request) throws Exception{
+        String xml = WebUtils.getRequestBody(request);
+        XStream xstream = new XStream(new DomDriver());
+
+        //User user = new User();
+        //user.setId(0);
+        //user.setUsername("admin");
+
+        //String xml = xstream.toXML(user);                 // 序列化
+
+        User user = (User)xstream.fromXML(xml);             // 反序列化
+        return "xstream";
+    }
+        ]]></case>
+    </test>
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
