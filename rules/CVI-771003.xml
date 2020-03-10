@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="Velocity模板注入RCE"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[Velocity\.evaluate\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(org\.apache\.velocity\.app\.Velocity)]]></match2>
+    <level value="8"/>
+    <solution><![CDATA[
+        ## 安全风险
+        URL跳转漏洞
+
+        ### 形成原理
+        信任了用户输入的URL，而最终响应30x跳转
+
+        ### 风险
+        参考：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/SpEL.java
+]]>
+    </solution>
+    <test>
+        <case assert="true"><![CDATA[
+import org.apache.velocity.app.Velocity;
+
+    @GetMapping("/velocity")
+    private static void velocity(String template){
+        Velocity.init();
+
+        VelocityContext context = new VelocityContext();
+
+        context.put("author", "Elliot A.");
+        context.put("address", "217 E Broadway");
+        context.put("phone", "555-1337");
+
+        StringWriter swOut = new StringWriter();
+        Velocity.evaluate(context, swOut, "test", template);
+    }
+       ]]></case>
+    </test>
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
