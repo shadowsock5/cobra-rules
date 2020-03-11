@@ -7,6 +7,8 @@
 - CVI-771003.xml    Velocity模板注入RCE
 - CVI-771004.xml    Runtime RCE
 - CVI-771005.xml    ProcessBuilder RCE
+- CVI-771006.xml    fastjson反序列化RCE
+
 
 
 ### 自带的PHP
