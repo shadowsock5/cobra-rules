@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="Java原生RCE(ProcessBuilder)"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[\.start\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(new\s*ProcessBuilder\()]]></match2>
+    <level value="8"/>
+    <solution><![CDATA[
+        ## 安全风险
+        URL跳转漏洞
+
+        ### 形成原理
+        信任了用户输入的URL，而最终响应30x跳转
+
+        ### 风险
+        参考：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/SpEL.java
+]]>
+    </solution>
+    <test>
+        <case assert="true"><![CDATA[
+                Process p = new ProcessBuilder("myCommand", "myArg").start();
+       ]]></case>
+    </test>
+
+    <test>
+        <case assert="true"><![CDATA[
+ ProcessBuilder pb = new ProcessBuilder("myCommand", "myArg1", "myArg2");
+ Map<String, String> env = pb.environment();
+ env.put("VAR1", "myValue");
+ env.remove("OTHERVAR");
+ env.put("VAR2", env.get("VAR1") + "suffix");
+ pb.directory(new File("myDir"));
+ Process p = pb.start();    // 真正执行命令的点
+       ]]></case>
+    </test>
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
