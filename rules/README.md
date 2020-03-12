@@ -13,6 +13,16 @@
 - CVI-771008.xml    GroovyScriptEngine.run RCE
 - CVI-771009.xml    //TODO
 
+//TODO 
+1. Jackson 反序列化：https://github.com/find-sec-bugs/find-sec-bugs/blob/master/findsecbugs-samples-java/src/test/java/testcode/serial/UnsafeJacksonObjectDeserialization.java
+https://github.com/threedr3am/learnjavabug/tree/master/jackson/src/main/java/com/threedr3am/bug/jackson
+2. Groovy 其他反序列化RCE的方法
+3. XXE：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/othervulns/ooxmlXXE.java
+https://github.com/threedr3am/learnjavabug/tree/master/xxe/src/main/java/com/threedr3am/bug/xxe
+4. xlsx 反序列化：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/othervulns/xlsxStreamerXXE.java
+5. XMLDecoder反序列化：https://github.com/find-sec-bugs/find-sec-bugs/blob/master/findsecbugs-samples-java/src/test/java/testcode/xmldecoder/XmlDecodeUtil.java
+
+
 ----
 - CVI-772001.xml    MultipartFile/FileItem 文件上传
 
