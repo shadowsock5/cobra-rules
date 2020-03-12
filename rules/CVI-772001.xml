@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+        <name value="MultipartFile/FileItem 文件上传"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[org\.apache\.commons\.fileupload\.FileItem|org\.apache\.wicket\.util\.upload\.FileItem|org\.springframework\.web\.multipart\.MultipartFile]]></match>
+    <level value="8"/>
+    <solution><![CDATA[
+        ## 安全风险
+        URL跳转漏洞
+
+        ### 形成原理
+        信任了用户输入的URL，而最终响应30x跳转
+
+        ### 风险
+        参考：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/SpEL.java
+        perl语法的正则表达式参考：
+        https://www.runoob.com/perl/perl-regular-expressions.html
+]]>
+    </solution>
+    <test>
+            <case assert="true"><![CDATA[
+import org.springframework.web.multipart.MultipartFile;
+
+public String handleFileUpload(MultipartFile file){
+    String fileName = file.getOriginalFilename();
+    if (fileName==null) {
+        return "file is error";
+    }
+    String filePath = "/static/images/uploads/"+fileName;
+    if (!file.isEmpty()) {
+        try {
+            byte[] bytes = file.getBytes();
+            BufferedOutputStream stream =
+                    new BufferedOutputStream(new FileOutputStream(new File(filePath)));
+            stream.write(bytes);
+            stream.close();
+            return "OK";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    } else {
+        return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
+    }
+}
+        ]]></case>
+
+        <case assert="true"><![CDATA[
+import org.apache.wicket.util.upload.FileItem;
+    public void handleFile(HttpServletRequest req) throws FileUploadException {
+        ServletFileUpload upload = new ServletFileUpload();
+        List<FileItem> fileItems = upload.parseRequest(req);
+
+        for (FileItem item : fileItems) {
+            System.out.println("Saving " + item.getName() + "...");
+        }
+    }
+        ]]></case>
+
+        <case assert="true"><![CDATA[
+import org.apache.commons.fileupload.FileItem;
+    public void handleFile(HttpServletRequest req) throws FileUploadException {
+        ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+        List<FileItem> fileItems = upload.parseRequest(req);
+
+        for (FileItem item : fileItems) {
+            System.out.println("Saving " + item.getName() + "...");
+        }
+    }
+    ]]></case>
+
+    </test>
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
