@@ -2,13 +2,19 @@
 - CVI-1201XX.xml    SSRF
 ----
 - CVI-7700XX.xml    URL跳转
+----
 - CVI-771001.xml    XStream反序列化RCE
 - CVI-771002.xml    SpEL注入RCE
 - CVI-771003.xml    Velocity模板注入RCE
 - CVI-771004.xml    Runtime RCE
 - CVI-771005.xml    ProcessBuilder RCE
 - CVI-771006.xml    fastjson反序列化RCE
+- CVI-771007.xml    GroovyShell.evaluate RCE
+- CVI-771008.xml    GroovyScriptEngine.run RCE
+- CVI-771009.xml    //TODO
 
+----
+- CVI-772001.xml    MultipartFile/FileItem 文件上传
 
 
 ### 自带的PHP
