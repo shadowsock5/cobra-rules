@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="ObjectInputStream 反序列化RCE"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[\.readObject\(|\.readUnshared\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(java\.io\.ObjectInputStream)]]></match2>
+    <level value="8"/>
+    <solution><![CDATA[
+        ## 安全风险
+        反序列化漏洞
+
+        ### 形成原理
+        反序列化操作一般在导入模版文件、网络通信、数据传输、日志格式化存储、对象数据落磁盘或DB存储等业务场景,在代码审计时可重点关注一些反序列化操>作函数并判断输入是否可控
+
+        ### 修复方案
+        如果可以明确反序列化对象类的则可在反序列化时设置白名单，对于一些只提供接口的库则可使用黑名单设置不允许被反序列化类或者提供设置白名单的接口
+，可通过Hook函数resolveClass来校验反序列化的类从而实现白名单校验。
+        参考: https://cryin.github.io/blog/JAVA-Static-Code-Audit-and-Analysis/
+]]>
+    </solution>
+    <test>
+            <case assert="true"><![CDATA[
+
+import java.io.ObjectInputStream;
+
+    /**
+     * java -jar ysoserial.jar CommonsCollections5 "open -a Calculator" | base64
+     * Add the result to rememberMe cookie.
+     *
+     * http://localhost:8080/deserialize/rememberMe/vul
+     */
+    @RequestMapping("/rememberMe/vul")
+    public String rememberMeVul(HttpServletRequest request)
+            throws IOException, ClassNotFoundException {
+
+        Cookie cookie = getCookie(request, cookieName);
+
+        if (null == cookie){
+            return "No rememberMe cookie. Right?";
+        }
+
+        String rememberMe = cookie.getValue();
+        byte[] decoded = Base64.getDecoder().decode(rememberMe);
+
+        ByteArrayInputStream bytes = new ByteArrayInputStream(decoded);
+        ObjectInputStream in = new ObjectInputStream(bytes);
+        in.readObject();    //反序列化操作
+        in.close();
+
+        return "Are u ok?";
+    }
+       ]]></case>
+    </test>
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
