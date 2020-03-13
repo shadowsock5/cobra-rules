@@ -11,7 +11,8 @@
 - CVI-771006.xml    fastjson反序列化RCE
 - CVI-771007.xml    GroovyShell.evaluate RCE
 - CVI-771008.xml    GroovyScriptEngine.run RCE
-- CVI-771009.xml    //TODO
+- CVI-771009.xml    ObjectInputStream 反序列化RCE
+- CVI-771010.xml    Yaml.load 反序列化RCE
 
 //TODO 
 1. Jackson 反序列化：https://github.com/find-sec-bugs/find-sec-bugs/blob/master/findsecbugs-samples-java/src/test/java/testcode/serial/UnsafeJacksonObjectDeserialization.java
