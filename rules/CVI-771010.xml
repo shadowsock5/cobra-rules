@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="Yaml.load 反序列化RCE"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[\.load\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(org\.yaml\.snakeyaml\.Yaml)]]></match2>
+    <level value="8"/>
+    <solution><![CDATA[
+        ## 安全风险
+        反序列化漏洞
+
+        ### 形成原理
+        反序列化操作一般在导入模版文件、网络通信、数据传输、日志格式化存储、对象数据落磁盘或DB存储等业务场景,在代码审计时可重点关注一些反序列化操>作函数并判断输入是否可控
+
+        ### 修复方案
+        如果可以明确反序列化对象类的则可在反序列化时设置白名单，对于一些只提供接口的库则可使用黑名单设置不允许被反序列化类或者提供设置白名单的接口
+，可通过Hook函数resolveClass来校验反序列化的类从而实现白名单校验。
+        参考: https://cryin.github.io/blog/JAVA-Static-Code-Audit-and-Analysis/
+]]>
+    </solution>
+    <test>
+            <case assert="true"><![CDATA[
+
+import org.yaml.snakeyaml.Yaml;
+
+    // 借用[CVE-2020-1947]Apache ShardingSphere UI YAML RCE的例子
+    public static Map<?, ?> unmarshal(String yamlContent) {
+        return (Map)(Strings.isNullOrEmpty(yamlContent) ? new LinkedHashMap() : (Map)(new Yaml()).load(yamlContent));
+    }
+       ]]></case>
+    </test>
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
