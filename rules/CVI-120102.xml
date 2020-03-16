@@ -3,12 +3,12 @@
     <name value="Request.Get由于url参数可控导致的SSRF"/>
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[Request.Get\(.*\)]]></match> <!-- 先判断是否有Request.Get(url)方法调用-->
-    <match2  block="in-function-down"><![CDATA[\.execute\(\)]]></match2>  <!-- 然后后续有execute-->
+    <match2  block="in-function-down"><![CDATA[org\.apache\.http\.client\.fluent\.Request]]></match2>  <!-- 全限定名-->
     <level value="6"/>
     <test>
         <case assert="true"><![CDATA[
             String url = request.getParameter("url");
-            return Request.Get(url).execute().returnContent().toString();
+            return Request.Get(url).execute().returnContent().toString();    //execute()方法真正执行请求
         ]]></case>
 
         <case assert="true"><![CDATA[
