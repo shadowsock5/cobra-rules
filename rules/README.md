@@ -1,8 +1,23 @@
 ### Java
-- CVI-1201XX.xml    SSRF
-----
-- CVI-7700XX.xml    URL跳转
-----
+#### CVI-1201XX.xml    SSRF
+
+- CVI-120101.xml    URLConnection/HttpURLConnection的SSRF
+- CVI-120102.xml    org.apache.http.client.fluent.Request.Get的SSRF
+- CVI-120103.xml    URL#openStream/getContent的SSRF
+- CVI-120104.xml    javax.imageio.ImageIO.read的SSRF
+- CVI-120105.xml    org.apache.commons.io.IOUtils.toByteArray的SSRF
+- CVI-120106.xml    org.apache.http.impl.client.CloseableHttpClient/HttpClients的SSRF
+- CVI-120107.xml    com.squareup.okhttp.Request#newCall的SSRF
+- CVI-120108.xml    org.springframework.web.client.RestTemplate的SSRF
+
+#### CVI-7700XX.xml    URL跳转
+
+- CVI-770001.xml    setHeader/addHeader("Location" 的SSRF
+- CVI-770002.xml    Spring redirect的SSRF
+- CVI-770003.xml    sendRedirect的SSRF
+
+#### CVI-7710XX.xml    反序列化/模板注入/RCE
+
 - CVI-771001.xml    XStream反序列化RCE
 - CVI-771002.xml    SpEL注入RCE
 - CVI-771003.xml    Velocity模板注入RCE
