@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="Jackson反序列化RCE"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[\.enableDefaultTyping\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(com\.fasterxml\.jackson\.databind\.ObjectMapper)]]></match2>
+    <level value="8"/>
+    <solution><![CDATA[
+        ## 安全风险
+        URL跳转漏洞
+
+        ### 形成原理
+        信任了用户输入的URL，而最终响应30x跳转
+
+        ### 风险
+        参考：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/SpEL.java
+        perl语法的正则表达式参考：
+        https://www.runoob.com/perl/perl-regular-expressions.html
+]]>
+    </solution>
+    <test>
+            <case assert="true"><![CDATA[
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+    @RequestMapping(value = "/deserialize", method = {RequestMethod.POST })
+    @ResponseBody
+    public static String Deserialize(@RequestBody String params) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        mapper.enableDefaultTyping();
+        return mapper.readValue(params, Object.class);
+
+       ]]></case>
+    </test>
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
