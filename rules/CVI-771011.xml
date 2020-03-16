@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="XMLDecoder反序列化RCE"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[\.readObject\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(java\.beans\.XMLDecoder)]]></match2>
+    <level value="8"/>
+    <solution><![CDATA[
+        ## 安全风险
+        XMLDecoder用于将XMLEncoder创建的xml文档内容反序列化为一个Java对象，这是一个java中的类，并不是Weblogic特有的，类的位置为java.beans.XMLDecoder。
+        XMLDecoder在JDK 1.4~JDK 11中都存在反序列化漏洞安全风险。
+
+        ### 检测方法
+        全局搜索XMLDecoder关键字，排查是否调用readObject()函数且参数是否可控。
+        
+        
+]]>
+    </solution>
+    <test>
+        <case assert="true"><![CDATA[
+import java.beans.XMLDecoder;
+
+@RestController
+public class XmlDecoderRCE {
+
+        /**
+         * @author shadowsock5 @2020-03-16
+         */
+        @PostMapping("/XmlDecoder")
+        public String parseXml(HttpServletRequest request) throws Exception{
+            InputStream in = request.getInputStream();
+            XMLDecoder d = new XMLDecoder(in);
+            Object result = d.readObject(); //Deserialization happen here
+            return "xstream";
+        }
+}
+        ]]></case>
+
+        <case assert="true"><![CDATA[
+import java.beans.XMLDecoder;
+
+    public static void XMLDecode_Deserialize(String path) throws Exception {
+        File file = new File(path);
+        FileInputStream fis = new FileInputStream(file);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        XMLDecoder xd = new XMLDecoder(bis);
+        xd.readObject();
+        xd.close();
+        ]]></case>
+
+    </test>
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
