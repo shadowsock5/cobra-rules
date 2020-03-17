@@ -31,6 +31,26 @@
 - CVI-771011.xml    XMLDecoder反序列化RCE
 - CVI-771012.xml    Jackson反序列化RCE
 
+#### CVI-7720XX.xml   各种XXE
+ 
+- javax.xml.parsers.DocumentBuilder
+- javax.xml.stream.XMLStreamReader
+- org.jdom.input.SAXBuilder
+- org.jdom2.input.SAXBuilder
+- javax.xml.parsers.SAXParser
+- org.dom4j.io.SAXReader 
+- org.xml.sax.XMLReader
+- javax.xml.transform.sax.SAXSource 
+- javax.xml.transform.TransformerFactory 
+- javax.xml.transform.sax.SAXTransformerFactory 
+- javax.xml.validation.SchemaFactory
+- javax.xml.bind.Unmarshaller
+- javax.xml.xpath.XPathExpression
+- org.apache.poi.xssf.usermodel.XSSFWorkbook
+- org.apache.poi.ss.usermodel.WorkbookFactory
+- org.apache.poi.ss.usermodel.Workbook
+
+
 //TODO 
 2. Groovy 其他反序列化RCE的方法
 3. XXE：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/othervulns/ooxmlXXE.java
