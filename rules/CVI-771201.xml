@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="各种XXE"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[(org\.jdom2\?\.input\.SAXBuilder|org\.dom4j\.io\.SAXReader|org\.xml\.sax\.XMLReader|org\.xml\.sax\.helpers\.XMLReaderFactory|javax\.xml\.stream\.XMLStreamReader|javax\.xml\.parsers\.DocumentBuilder|javax\.xml\.parsers\.SAXParser|javax\.xml\.transform\.sax\.SAXSource|javax\.xml\.transform\.TransformerFactory|javax\.xml\.transform\.sax\.SAXTransformerFactory|javax\.xml\.validation\.SchemaFactory|javax\.xml\.bind\.Unmarshaller|javax.xml.xpath.XPathExpression)]]></match>
+    <level value="6"/>
+    <solution><![CDATA[
+        ## 安全风险
+        URL跳转漏洞
+
+        ### 形成原理
+        信任了用户输入的URL，而最终响应30x跳转
+
+        ### 风险
+        参考：https://cryin.github.io/blog/JAVA-Static-Code-Audit-and-Analysis/
+
+        ### 修复方案
+        使用XML解析器时需要设置其属性，禁止使用外部实体，以SAXReader为例，安全的使用方式如下:
+        sax.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        sax.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        sax.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+]]>
+    </solution>
+    <test>
+            <case assert="true"><![CDATA[
+import com.monitorjbl.xlsx.StreamingReader;
+import org.apache.poi.ss.usermodel.Workbook;
+
+    @PostMapping("/readxlsx")
+    public void xllx_streamer_xxe(MultipartFile file)throws IOException {
+        Workbook wb = StreamingReader.builder().open(file.getInputStream());
+    }
+    ]]></case>
+
+
+            <case assert="true"><![CDATA[
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+XSSFWorkbook wb = new XSSFWorkbook(file.getInputStream());
+    ]]></case>
+    </test>
+
+                <case assert="true"><![CDATA[
+import org.xml.sax.helpers.XMLReaderFactory;
+
+            XMLReader xmlReader = XMLReaderFactory.createXMLReader();
+            xmlReader.parse(new InputSource(new StringReader(body)));  // parse xml
+    ]]></case>
+    </test>
+
+    <status value="on"/>
+    <author name="77" email="feei@feei.cn"/>
+</cobra>
