@@ -31,7 +31,7 @@
 - CVI-771011.xml    XMLDecoder反序列化RCE
 - CVI-771012.xml    Jackson反序列化RCE
 
-#### CVI-7720XX.xml   各种XXE
+#### CVI-7712XX.xml   各种XXE
  
 - javax.xml.parsers.DocumentBuilder
 - javax.xml.stream.XMLStreamReader
@@ -52,11 +52,8 @@
 
 
 //TODO 
-2. Groovy 其他反序列化RCE的方法
-3. XXE：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/othervulns/ooxmlXXE.java
-https://github.com/threedr3am/learnjavabug/tree/master/xxe/src/main/java/com/threedr3am/bug/xxe
-4. xlsx XXE：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/othervulns/xlsxStreamerXXE.java
-
+1. Groovy 其他反序列化RCE的方法
+2. freemarker 模板注入
 
 ----
 - CVI-772001.xml    MultipartFile/FileItem 文件上传
