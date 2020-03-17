@@ -31,7 +31,7 @@
 - CVI-771011.xml    XMLDecoder反序列化RCE
 - CVI-771012.xml    Jackson反序列化RCE
 
-#### CVI-7712XX.xml   各种XXE
+#### CVI-7712XX.xml   各种XXE（太杂了，结合黑盒确认吧）
  
 - javax.xml.parsers.DocumentBuilder
 - javax.xml.stream.XMLStreamReader
