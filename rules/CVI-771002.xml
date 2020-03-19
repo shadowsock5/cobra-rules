@@ -3,7 +3,7 @@
 <cobra document="https://github.com/WhaleShark-Team/cobra">
     <name value="SPEL注入RCE"/>
     <language value="java"/>
-    <match mode="regex-only-match"><![CDATA[\.parseExpression\(]]></match>
+    <match mode="regex-only-match"><![CDATA[\.getValue\(|\.setValue\(]]></match>
     <match2 block="in-file-up"><![CDATA[(org\.springframework\.expression\.spel\.standard\.SpelExpressionParser)]]></match2>
     <level value="8"/>
     <solution><![CDATA[
@@ -26,6 +26,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
         ExpressionParser parser = new SpelExpressionParser();
         // fix method: SimpleEvaluationContext
         String result = parser.parseExpression(expression).getValue().toString();
+        //使用setValue或getValue时触发代码执行。参考：https://p0rz9.github.io/2019/05/28/SpEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5/
         return result;
     }
         ]]></case>
