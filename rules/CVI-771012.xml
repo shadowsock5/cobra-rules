@@ -5,18 +5,16 @@
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[\.enableDefaultTyping\(]]></match>
     <match2 block="in-file-up"><![CDATA[(com\.fasterxml\.jackson\.databind\.ObjectMapper)]]></match2>
-    <level value="8"/>
+    <level value="10"/>
     <solution><![CDATA[
         ## 安全风险
-        URL跳转漏洞
+        Jackson-databind反序列化RCE
 
         ### 形成原理
-        信任了用户输入的URL，而最终响应30x跳转
+        应用代码中手动打开了多态支持 ObjectMapper#enableDefaultTyping，然后使用readValue方法解析json字符串。用户可传入危险的gadget造成RCE。
 
         ### 风险
-        参考：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/SpEL.java
-        perl语法的正则表达式参考：
-        https://www.runoob.com/perl/perl-regular-expressions.html
+        参考：https://find-sec-bugs.github.io/bugs.htm#JACKSON_UNSAFE_DESERIALIZATION
 ]]>
     </solution>
     <test>
@@ -33,5 +31,5 @@ import com.fasterxml.jackson.databind.ObjectMapper;
        ]]></case>
     </test>
     <status value="on"/>
-    <author name="77" email="feei@feei.cn"/>
+    <author name="77" email="77caikiki@gmail.com"/>
 </cobra>
