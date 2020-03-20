@@ -5,6 +5,9 @@
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[\.getValue\(|\.setValue\(]]></match>
     <match2 block="in-file-up"><![CDATA[(org\.springframework\.expression\.spel\.standard\.SpelExpressionParser)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(org\.springframework\.expression\.ExpressionParser)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(org\.springframework\.expression\.common\.TemplateAwareExpressionParser)]]></match2>
+    
     <level value="8"/>
     <solution><![CDATA[
         ## 安全风险
@@ -15,6 +18,7 @@
 
         ### 风险
         参考：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/SpEL.java
+        https://github.com/find-sec-bugs/find-sec-bugs/blob/master/findsecbugs-plugin/src/main/resources/injection-sinks/spel.txt
 ]]>
     </solution>
     <test>
