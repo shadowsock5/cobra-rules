@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cobra document="https://github.com/WhaleShark-Team/cobra">
-    <name value="Request.Get由于url参数可控导致的SSRF"/>
+    <name value="Request的SSRF"/>
     <language value="java"/>
-    <match mode="regex-only-match"><![CDATA[Request.Get\(.*\)]]></match> <!-- 先判断是否有Request.Get(url)方法调用-->
+    <match mode="regex-only-match"><![CDATA[\.Get\(|\.Post\(|\.Put\(|\.Patch\(|\.Delete\(|\.Options\(|\.Trace\(]]></match>
     <match2  block="in-function-down"><![CDATA[org\.apache\.http\.client\.fluent\.Request]]></match2>  <!-- 全限定名-->
     <level value="6"/>
     <test>
@@ -38,5 +38,5 @@
         5、利用file协议读取本地文件等。
     </solution>
     <status value="on"/>
-    <author name="77" email="feei@feei.cn"/>
+    <author name="77" email="77caikiki@gmail.com"/>
 </cobra>
