@@ -3,7 +3,11 @@
 <cobra document="https://github.com/WhaleShark-Team/cobra">
         <name value="MultipartFile/FileItem 文件上传"/>
     <language value="java"/>
-    <match mode="regex-only-match"><![CDATA[org\.apache\.commons\.fileupload\.FileItem|org\.apache\.wicket\.util\.upload\.FileItem|org\.springframework\.web\.multipart\.MultipartFile]]></match>
+    <match mode="regex-only-match"><![CDATA[\.getName\(|\.getOriginalFilename\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(org\.apache\.commons\.fileupload\.FileItem)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(org\.apache\.wicket\.util\.upload\.FileItem)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(org\.springframework\.web\.multipart\.MultipartFile)]]></match2>
+    
     <level value="8"/>
     <solution><![CDATA[
         ## 安全风险
@@ -71,5 +75,5 @@ import org.apache.commons.fileupload.FileItem;
 
     </test>
     <status value="on"/>
-    <author name="77" email="feei@feei.cn"/>
+    <author name="77" email="77caikiki@gmail.com"/>
 </cobra>
