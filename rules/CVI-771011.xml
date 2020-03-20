@@ -5,7 +5,7 @@
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[\.readObject\(]]></match>
     <match2 block="in-file-up"><![CDATA[(java\.beans\.XMLDecoder)]]></match2>
-    <level value="8"/>
+    <level value="10"/>
     <solution><![CDATA[
         ## 安全风险
         XMLDecoder用于将XMLEncoder创建的xml文档内容反序列化为一个Java对象，这是一个java中的类，并不是Weblogic特有的，类的位置为java.beans.XMLDecoder。
