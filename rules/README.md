@@ -32,6 +32,7 @@
 - CVI-771012.xml    Jackson反序列化RCE
 - CVI-771013.xml    Freemarker模板注入RCE
 - CVI-771014.xml    ScriptEngine注入RCE
+- CVI-771015.xml    JEXL注入RCE
 
 #### CVI-7712XX.xml   各种XXE（太杂了，结合黑盒确认吧）
  
