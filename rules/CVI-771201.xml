@@ -3,14 +3,28 @@
 <cobra document="https://github.com/WhaleShark-Team/cobra">
     <name value="各种XXE"/>
     <language value="java"/>
-    <match mode="regex-only-match"><![CDATA[(org\.jdom2\?\.input\.SAXBuilder|org\.dom4j\.io\.SAXReader|org\.xml\.sax\.XMLReader|org\.xml\.sax\.helpers\.XMLReaderFactory|javax\.xml\.stream\.XMLStreamReader|javax\.xml\.parsers\.DocumentBuilder|javax\.xml\.parsers\.SAXParser|javax\.xml\.transform\.sax\.SAXSource|javax\.xml\.transform\.TransformerFactory|javax\.xml\.transform\.sax\.SAXTransformerFactory|javax\.xml\.validation\.SchemaFactory|javax\.xml\.bind\.Unmarshaller|javax.xml.xpath.XPathExpression)]]></match>
-    <level value="6"/>
+    <match mode="regex-only-match"><![CDATA[(\.createXMLStreamReader\(|\.evaluate\(|\.parse\(|\.transform\()]]></match>
+    <match2 block="in-file-up"><![CDATA[(org\.jdom2\?\.input\.SAXBuilder)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(org\.dom4j\.io\.SAXReader)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(org\.xml\.sax\.XMLReader)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(org\.xml\.sax\.helpers\.XMLReaderFactory)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(javax\.xml\.stream\.XMLStreamReader)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(javax\.xml\.parsers\.DocumentBuilder)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(javax\.xml\.parsers\.SAXParser)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(javax\.xml\.transform\.sax\.SAXSource)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(javax\.xml\.transform\.TransformerFactory)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(javax\.xml\.transform\.sax\.SAXTransformerFactory)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(javax\.xml\.validation\.SchemaFactory)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(javax\.xml\.bind\.Unmarshaller)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(javax\.xml\.xpath\.XPathExpression)]]></match2>
+    
+    <level value="8"/>
     <solution><![CDATA[
         ## 安全风险
-        URL跳转漏洞
+        XXE漏洞
 
         ### 形成原理
-        信任了用户输入的URL，而最终响应30x跳转
+        很多Java库默认情况下没有禁用外部实体，当使用这些库解析XML时，会导致XXE。
 
         ### 风险
         参考：https://cryin.github.io/blog/JAVA-Static-Code-Audit-and-Analysis/
@@ -50,5 +64,5 @@ import org.xml.sax.helpers.XMLReaderFactory;
     </test>
 
     <status value="on"/>
-    <author name="77" email="feei@feei.cn"/>
+    <author name="77" email="77caikiki@gmail.com"/>
 </cobra>
