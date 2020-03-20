@@ -11,7 +11,10 @@
         XMLDecoder用于将XMLEncoder创建的xml文档内容反序列化为一个Java对象，这是一个java中的类，并不是Weblogic特有的，类的位置为java.beans.XMLDecoder。
         XMLDecoder在JDK 1.4~JDK 11中都存在反序列化漏洞安全风险。
 
-        ### 检测方法
+        ## 漏洞原理
+        XMLDecoder支持任意方法调用。本来这个功能是用来调用任意setter方法的，但是实际上任何方法都可以被调用。
+
+        ## 检测方法
         全局搜索XMLDecoder关键字，排查是否调用readObject()函数且参数是否可控。
         
         
