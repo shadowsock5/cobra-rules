@@ -12,9 +12,9 @@
 
 #### CVI-7700XX.xml    URL跳转
 
-- CVI-770001.xml    setHeader/addHeader("Location" 的SSRF
-- CVI-770002.xml    Spring redirect的SSRF
-- CVI-770003.xml    sendRedirect的SSRF
+- CVI-770001.xml    setHeader/addHeader("Location" 的URL跳转
+- CVI-770002.xml    Spring redirect的URL跳转
+- CVI-770003.xml    sendRedirect的URL跳转
 
 #### CVI-7710XX.xml    反序列化/模板注入/RCE
 
