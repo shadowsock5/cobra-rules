@@ -4,7 +4,7 @@
     <name value="URL跳转(Spring sendRedirect)"/>
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[\.sendRedirect\(]]></match>
-    <match2 block="in-file-up"><![CDATA[(org\.springframework\.web\.bind\.annotation)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(javax\.servlet\.http\.HttpServletResponse)]]></match2>
     <level value="4"/>
     <solution><![CDATA[
         ## 安全风险
@@ -20,6 +20,7 @@
         <case assert="true"><![CDATA[
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import javax.servlet.http.HttpServletResponse;
 
     @RequestMapping("/sendRedirect")
     @ResponseBody
