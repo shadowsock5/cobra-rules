@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="EL注入RCE"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[\.createValueExpression\(|\.createMethodExpression\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(javax\.el\.ExpressionFactory)]]></match2>
+    
+    <level value="10"/>
+    <solution><![CDATA[
+        ## 安全风险
+        EL注入RCE
+        ### 形成原理
+        接收了用户提供的EL表达式并执行。
+        ### 风险
+        参考：https://github.com/find-sec-bugs/find-sec-bugs/blob/master/findsecbugs-plugin/src/main/resources/injection-sinks/el.txt
+]]>
+    </solution>
+    <test>
+        <case assert="true"><![CDATA[
+import javax.el.ExpressionFactory;
+
+javax.el.ExpressionFactory.createMethodExpression();
+javax/el/ExpressionFactory.createValueExpression();
+
+        ]]></case>
+    </test>
+    <status value="on"/>
+    <author name="77" email="77caikiki@gmail.com"/>
+</cobra>
