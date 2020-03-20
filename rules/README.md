@@ -30,6 +30,7 @@
 - CVI-771010.xml    Yaml.load 反序列化RCE
 - CVI-771011.xml    XMLDecoder反序列化RCE
 - CVI-771012.xml    Jackson反序列化RCE
+- CVI-771013.xml    Freemarker模板注入RCE
 
 #### CVI-7712XX.xml   各种XXE（太杂了，结合黑盒确认吧）
  
@@ -53,7 +54,6 @@
 
 //TODO 
 1. Groovy 其他反序列化RCE的方法
-2. freemarker 模板注入
 
 ----
 - CVI-772001.xml    MultipartFile/FileItem 文件上传
