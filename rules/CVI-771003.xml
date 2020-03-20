@@ -5,16 +5,16 @@
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[Velocity\.evaluate\(]]></match>
     <match2 block="in-file-up"><![CDATA[(org\.apache\.velocity\.app\.Velocity)]]></match2>
-    <level value="8"/>
+    <level value="10"/>
     <solution><![CDATA[
         ## 安全风险
-        URL跳转漏洞
+        Velocity模板注入RCE
 
         ### 形成原理
-        信任了用户输入的URL，而最终响应30x跳转
+        Velocity模板功能很强大，但是没有沙箱机制，攻击者如果可控待执行的Velocity模板，则可在受影响服务器上执行任意代码。
 
         ### 风险
-        参考：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/SpEL.java
+        参考：https://find-sec-bugs.github.io/bugs.htm#TEMPLATE_INJECTION_VELOCITY
 ]]>
     </solution>
     <test>
@@ -37,5 +37,5 @@ import org.apache.velocity.app.Velocity;
        ]]></case>
     </test>
     <status value="on"/>
-    <author name="77" email="feei@feei.cn"/>
+    <author name="77" email="77caikiki@gmail.com"/>
 </cobra>
