@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/WhaleShark-Team/cobra">
+    <name value="ScriptEngine注入RCE"/>
+    <language value="java"/>
+    <match mode="regex-only-match"><![CDATA[\.eval\(]]></match>
+    <match2 block="in-file-up"><![CDATA[(javax\.script\.ScriptEngine)]]></match2>
+    <match2 block="in-file-up"><![CDATA[(jdk\.nashorn\.api\.scripting\.NashornScriptEngine)]]></match2>
+    
+    <level value="10"/>
+    <solution><![CDATA[
+        ## 安全风险
+        ScriptEngine注入RCE
+        ### 形成原理
+        Velocity模板功能很强大，但是没有沙箱机制，攻击者如果可控待执行的Velocity模板，则可在受影响服务器上执行任意代码。
+        ### 风险
+        参考：https://find-sec-bugs.github.io/bugs.htm#SCRIPT_ENGINE_INJECTION
+]]>
+    </solution>
+    <test>
+        <case assert="true"><![CDATA[
+import javax.script.ScriptEngine;
+
+public void runCustomTrigger(String script) {
+    ScriptEngineManager factory = new ScriptEngineManager();
+    ScriptEngine engine = factory.getEngineByName("JavaScript");
+    //ScriptEngine engine = factory.getEngineByName("nashorn");
+
+    engine.eval(script); //漏洞触发点
+}
+     ]]></case>
+     
+         <test>
+        <case assert="false"><![CDATA[    //有沙箱，不存在漏洞
+import com.brightech.xmp.js.SandboxContextFactory;
+
+public void runCustomTrigger(String script) {
+    SandboxContextFactory contextFactory = new SandboxContextFactory();
+    Context context = contextFactory.makeContext();
+    contextFactory.enterContext(context);
+    try {
+        ScriptableObject prototype = context.initStandardObjects();
+        prototype.setParentScope(null);
+        Scriptable scope = context.newObject(prototype);
+        scope.setPrototype(prototype);
+
+        context.evaluateString(scope,script, null, -1, null);
+    } finally {
+        context.exit();
+    }
+}
+     ]]></case>
+       
+    </test>
+    <status value="on"/>
+    <author name="77" email="77caikiki@gmail.com"/>
+</cobra>
