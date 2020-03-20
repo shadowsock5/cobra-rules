@@ -33,6 +33,7 @@
 - CVI-771013.xml    Freemarker模板注入RCE
 - CVI-771014.xml    ScriptEngine注入RCE
 - CVI-771015.xml    JEXL注入RCE
+- CVI-771016.xml    EL注入RCE
 
 #### CVI-7712XX.xml   各种XXE（太杂了，结合黑盒确认吧）
  
