@@ -11,10 +11,13 @@
     <solution><![CDATA[
         ## 安全风险
         ScriptEngine注入RCE
-        ### 形成原理
-        Velocity模板功能很强大，但是没有沙箱机制，攻击者如果可控待执行的Velocity模板，则可在受影响服务器上执行任意代码。
-        ### 风险
-        参考：https://find-sec-bugs.github.io/bugs.htm#SCRIPT_ENGINE_INJECTION
+        ## 形成原理
+        调用内置JavaScript引擎，则可在受影响服务器上执行任意js代码（可转换为Java代码）。
+        实例参考CVE-2019-0193: https://mp.weixin.qq.com/s/typLOXZCev_9WH_Ux0s6oA
+        ## 风险
+        参考：
+        https://find-sec-bugs.github.io/bugs.htm#SCRIPT_ENGINE_INJECTION
+        https://winterbe.com/posts/2014/04/05/java8-nashorn-tutorial/
 ]]>
     </solution>
     <test>
