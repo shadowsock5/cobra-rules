@@ -2,7 +2,7 @@
 #### CVI-1201XX.xml    SSRF
 
 - CVI-120101.xml    URLConnection/HttpURLConnection的SSRF
-- CVI-120102.xml    org.apache.http.client.fluent.Request.Get的SSRF
+- CVI-120102.xml    org.apache.http.client.fluent.Request的SSRF
 - CVI-120103.xml    URL#openStream/getContent的SSRF
 - CVI-120104.xml    javax.imageio.ImageIO.read的SSRF
 - CVI-120105.xml    org.apache.commons.io.IOUtils.toByteArray的SSRF
@@ -31,6 +31,7 @@
 - CVI-771011.xml    XMLDecoder反序列化RCE
 - CVI-771012.xml    Jackson反序列化RCE
 - CVI-771013.xml    Freemarker模板注入RCE
+- CVI-771014.xml    ScriptEngine注入RCE
 
 #### CVI-7712XX.xml   各种XXE（太杂了，结合黑盒确认吧）
  
@@ -53,10 +54,16 @@
 
 
 //TODO 
-1. Groovy 其他反序列化RCE的方法
+1. Groovy 其他RCE的方法
 
-----
+#### CVI-7720XX.xml
+
 - CVI-772001.xml    MultipartFile/FileItem 文件上传
+
+#### CVI-7730XX.xml
+
+- CVI-773001.xml    路径穿越(文件读/写)
+
 
 
 ### 自带的PHP
