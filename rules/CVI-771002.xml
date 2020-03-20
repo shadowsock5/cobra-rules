@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <cobra document="https://github.com/WhaleShark-Team/cobra">
-    <name value="SPEL注入RCE"/>
+    <name value="SpEL注入RCE"/>
     <language value="java"/>
     <match mode="regex-only-match"><![CDATA[\.getValue\(|\.setValue\(]]></match>
     <match2 block="in-file-up"><![CDATA[(org\.springframework\.expression\.spel\.standard\.SpelExpressionParser)]]></match2>
     <level value="8"/>
     <solution><![CDATA[
         ## 安全风险
-        URL跳转漏洞
+        SpEL注入RCE
 
         ### 形成原理
-        信任了用户输入的URL，而最终响应30x跳转
+        接收了用户提供的SpEL表达式并执行。
 
         ### 风险
         参考：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/SpEL.java
@@ -32,5 +32,5 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
         ]]></case>
     </test>
     <status value="on"/>
-    <author name="77" email="feei@feei.cn"/>
+    <author name="77" email="77caikiki@gmail.com"/>
 </cobra>
