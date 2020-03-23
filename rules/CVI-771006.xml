@@ -8,15 +8,12 @@
     <level value="8"/>
     <solution><![CDATA[
         ## 安全风险
-        URL跳转漏洞
+        fastjson反序列化RCE
 
         ### 形成原理
-        信任了用户输入的URL，而最终响应30x跳转
-
-        ### 风险
-        参考：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/SpEL.java
-        perl语法的正则表达式参考：
-        https://www.runoob.com/perl/perl-regular-expressions.html
+        fastjson <= 1.2.24时，无autoType防御，可直接反序列化，一定要升级；
+        1.2.25 <= fastjson <= 1.2.47时，一定要升级，因为autoType防御机制被绕过，一定要升级；
+        1.2.48 <= fastjson <= 1.2.66,时，一定要升级，疑似autoType防御机制再次被绕过，一定要升级。
 ]]>
     </solution>
     <test>
@@ -33,5 +30,5 @@ import com.alibaba.fastjson.parser.ParserConfig;
        ]]></case>
     </test>
     <status value="on"/>
-    <author name="77" email="feei@feei.cn"/>
+    <author name="77" email="77caikiki@gmail.com"/>
 </cobra>
