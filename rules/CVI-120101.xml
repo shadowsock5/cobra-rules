@@ -10,7 +10,7 @@
             String url = request.getParameter("url");
             URL u = new URL(url);
             URLConnection urlConnection = u.openConnection();
-            urlConnection.connect();                         // 发起DNS请求
+            urlConnection.connect();                         // 发起DNS请求(建立TCP连接)
         ]]></case>
 
         <case assert="true"><![CDATA[
@@ -23,10 +23,16 @@
             URLConnection urlConnection =  new URL(url).openConnection();
             urlConnection.getLastModified();                  // 发起HTTP请求
         ]]></case>
+        <case assert="true"><![CDATA[
+            import sun.net.www.protocol.http.HttpURLConnection;
+            String url = request.getParameter("url");
+            HttpURLConnection httpURLConnection =  new URL(url).openConnection();
+            urlConnection.getContentType();                  // 发起HTTP请求
+        ]]></case>
         <case assert="false"><![CDATA[
             String url = request.getParameter("url");
             URL u = new URL(url);
-            URLConnection urlConnection = u.openConnection();
+            URLConnection urlConnection = u.openConnection();  // 没有TCP/DNS请求
         ]]></case>
     </test>
     <solution>
@@ -35,6 +41,28 @@
 
         ## 形成原理
         SSRF形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。
+```
+URLConnection#connect
+发起DNS请求(建立TCP连接)
+
+
+URLConnection#getInputStream
+发起HTTP请求
+
+
+URLConnection#getLastModified
+发起HTTP请求
+
+
+import sun.net.www.protocol.http.HttpURLConnection;
+HttpURLConnection#getContentType
+发起HTTP请求
+
+
+URL u = new URL(url);
+URLConnection urlConnection = u.openConnection();
+没有TCP/DNS请求
+```
 
         ## 风险
         1、攻击者可以对外网、服务器所在内网、本地进行端口扫描，获取服务的banner信息。
