@@ -7,14 +7,6 @@
     <match2 block="in-file-up"><![CDATA[(Runtime\.getRuntime)]]></match2>
     <level value="8"/>
     <solution><![CDATA[
-        ## 安全风险
-        URL跳转漏洞
-
-        ### 形成原理
-        信任了用户输入的URL，而最终响应30x跳转
-
-        ### 风险
-        参考：https://github.com/JoyChou93/java-sec-code/blob/master/src/main/java/org/joychou/controller/SpEL.java
 ]]>
     </solution>
     <test>
