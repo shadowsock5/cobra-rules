@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobra document="https://github.com/shadowsock5/notes/blob/master/SQLi.md">
+    <name value="Mybatis下的SQL注入(Java精准)"/>
+    <language value="java"/>    <!-- 对应.java后缀   -->
+    <match mode="regex-only-match"><![CDATA[order by \$|group by \$|limit \$]]></match>
+    
+    <level value="9"/>
+    <solution><![CDATA[]]>
+    容易出问题的是in, like, order by, group by, limit处的注入。检查是否使用了$，以及是否拼接用户输入。
+    参考：https://github.com/shadowsock5/notes/blob/master/SQLi.md
+    </solution>
+    <status value="on"/>
+    <author name="77" email="77caikiki@gmail.com"/>
+</cobra>
