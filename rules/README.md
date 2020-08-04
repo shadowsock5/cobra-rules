@@ -60,27 +60,19 @@
 
 #### CVI-7720XX.xml
 
-- CVI-772001.xml    MultipartFile/FileItem 文件上传
+- CVI-772001.xml      org.apache.commons.fileupload.FileItem 文件上传
+- CVI-772001_1.xml    org.apache.wicket.util.upload.FileItem文件上传
+- CVI-772001_2.xml    org.springframework.web.multipart.MultipartFile文件上传
+- CVI-772002.xml      javax.servlet.http.Part文件上传
+- CVI-772003.xml      org.springframework.web.multipart.MultipartHttpServletRequest文件上传
 
 #### CVI-7730XX.xml
 
 - CVI-773001.xml    路径穿越(文件读/写)
 
 
+#### CVI-7740XX.xml    Mybatis下的SQL注入
+- CVI-774001.xml    通用的检测.java文件中的SQLi，准确率不高，只是定位危险函数
+- CVI-774002.xml    精准的检测.java文件中的SQLi，准确率较高
+- CVI-774003.xml    精准的检测.xml文件中的SQLi，准确率较高
 
-### 自带的PHP
-- CVI-110：配置错误
-- CVI-120：SSRF；
-- CVI-130：一些硬编码的安全风险；
-- CVI-140：各种XSS；
-- CVI-160：SQL注入；
-- CVI-165：LDAP注入；
-- CVI-167：XXE；
-- CVI-170：本地文件包含；
-- CVI-180：RCE；
-- CVI-190：各种信息泄露；
-- CVI-200：不安全的随机数（可移除）；
-- CVI-210：url跳转；
-- CVI-220: HTTP响应拆分,
-- CVI-260: 反序列化；
-- CVI-999: 引用了存在漏洞的三方组件
