@@ -10,3 +10,4 @@
 - https://github.com/momosecurity/mosec-maven-plugin
 - https://cryin.github.io/blog/JAVA-Static-Code-Audit-and-Analysis/
 - https://github.com/javaparser/javaparser
+- https://github.com/kuron3k0/CodeAuditChecklist/blob/master/JavaChecklist.md
