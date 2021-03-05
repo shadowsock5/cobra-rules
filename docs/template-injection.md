@@ -4,7 +4,7 @@
 VelocityContext context = new VelocityContext();
 StringWriter swOut = new StringWriter();
 String template = "file:///etc/passwd";
-Velocity.evaluate(context, swOut, "test", template);
+Velocity.evaluate(context, swOut, "test", template);     // 第四个参数是用户控制的Velocity模板内容
 ```
 本质：
 ```
