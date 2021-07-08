@@ -70,6 +70,11 @@
 
 - CVI-773001.xml    路径穿越(文件读/写)
 
+sink点:
+```
+org.apache.commons.io.FileUtils.writeStringToFile（fileName，fileContent）
+```
+
 
 #### CVI-7740XX.xml    Mybatis下的SQL注入
 - CVI-774001.xml    通用的检测.java文件中的SQLi，准确率不高，只是定位危险函数
