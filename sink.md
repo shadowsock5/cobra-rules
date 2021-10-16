@@ -44,4 +44,7 @@ list = JSON.parseArray("[" + args + "]", Object.class);
 JSONObject是一种Map类型，而不是Array或者Collection
 ![43591634369755_ pic_hd](https://user-images.githubusercontent.com/30398606/137578474-d32fb36c-09ce-4d59-b514-a422569f5455.jpg)
 
-但是它找set方法是按照字母顺序的
+但是它找set方法是按照字母顺序的，
+`autoCommit`这个属性先被调用，所以暂时没法调用fastjson的这个经典利用。
+![image](https://user-images.githubusercontent.com/30398606/137578913-4aad7612-c4e2-49d9-b595-b8c0ae29ff60.png)
+
