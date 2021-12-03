@@ -53,7 +53,12 @@
 - org.apache.poi.xssf.usermodel.XSSFWorkbook
 - org.apache.poi.ss.usermodel.WorkbookFactory
 - org.apache.poi.ss.usermodel.Workbook
+- org.dom4j.DocumentHelper#parseText
+- org.apache.commons.digester3.Digester#parse
 
+Ref :
+- https://github.com/github/securitylab/issues/426
+- 
 
 //TODO 
 1. Groovy 其他RCE的方法
