@@ -37,28 +37,35 @@
 
 #### CVI-7712XX.xml   各种XXE（太杂了，结合黑盒确认吧）
  
+- javax.xml.bind.Unmarshaller
 - javax.xml.parsers.DocumentBuilder
+- javax.xml.parsers.DocumentBuilderFactory
+- javax.xml.parsers.SAXParser
+- javax.xml.parsers.SAXParserFactory
 - javax.xml.stream.XMLStreamReader
+- javax.xml.transform.TransformerFactory
+- javax.xml.transform.sax.SAXSource
+- javax.xml.transform.sax.SAXTransformerFactory
+- javax.xml.transform.stream.StreamSource
+- javax.xml.validation.SchemaFactory
+- javax.xml.validation.Validator
+- javax.xml.xpath.XPathExpression
+- javax.xml.xpath.XpathExpression
+- org.apache.commons.digester3.Digester
+- org.apache.commons.digester3.Digester#parse
+- org.apache.poi.ss.usermodel.Workbook
+- org.apache.poi.ss.usermodel.WorkbookFactory
+- org.apache.poi.xssf.usermodel.XSSFWorkbook
+- org.dom4j.DocumentHelper#parseText
+- org.dom4j.io.SAXReader
 - org.jdom.input.SAXBuilder
 - org.jdom2.input.SAXBuilder
-- javax.xml.parsers.SAXParser
-- org.dom4j.io.SAXReader 
 - org.xml.sax.XMLReader
-- javax.xml.transform.sax.SAXSource 
-- javax.xml.transform.TransformerFactory 
-- javax.xml.transform.sax.SAXTransformerFactory 
-- javax.xml.validation.SchemaFactory
-- javax.xml.bind.Unmarshaller
-- javax.xml.xpath.XPathExpression
-- org.apache.poi.xssf.usermodel.XSSFWorkbook
-- org.apache.poi.ss.usermodel.WorkbookFactory
-- org.apache.poi.ss.usermodel.Workbook
-- org.dom4j.DocumentHelper#parseText
-- org.apache.commons.digester3.Digester#parse
+- org.xml.sax.helpers.XMLReaderFactory
 
 Ref :
 - https://github.com/github/securitylab/issues/426
-- 
+- [原创 | 纸上得来终觉浅—XXE大杂烩](https://mp.weixin.qq.com/s/AQ0dM6kdZBrMcAZenzlp3A)
 
 //TODO 
 1. Groovy 其他RCE的方法
