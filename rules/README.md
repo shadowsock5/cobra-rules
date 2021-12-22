@@ -50,8 +50,6 @@
 - javax.xml.validation.SchemaFactory
 - javax.xml.validation.Validator
 - javax.xml.xpath.XPathExpression
-- javax.xml.xpath.XpathExpression
-- org.apache.commons.digester3.Digester
 - org.apache.commons.digester3.Digester#parse
 - org.apache.poi.ss.usermodel.Workbook
 - org.apache.poi.ss.usermodel.WorkbookFactory
