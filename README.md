@@ -11,3 +11,4 @@
 - https://cryin.github.io/blog/JAVA-Static-Code-Audit-and-Analysis/
 - https://github.com/javaparser/javaparser
 - https://github.com/kuron3k0/CodeAuditChecklist/blob/master/JavaChecklist.md
+- https://github.com/haby0/sec-note/blob/main/java/xxe/note.md
