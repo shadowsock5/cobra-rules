@@ -91,3 +91,15 @@ org.apache.commons.io.FileUtils.writeStringToFile（fileName，fileContent）
 - CVI-774002.xml    精准的检测.java文件中的SQLi，准确率较高
 - CVI-774003.xml    精准的检测.xml文件中的SQLi，准确率较高
 
+
+#### JNDI注入的sink
+```
+LdapCtx.c_lookup()
+ComponentContext.p_lookup()
+PartialCompositeContext.lookup()
+GenericURLContext.lookup()
+ldapURLContext.lookup()
+InitialContext.lookup()
+```
+Ref:
+- [realworldctf old system复盘（jdk1.4 getter jndi gadget）](https://xz.aliyun.com/t/9126)
