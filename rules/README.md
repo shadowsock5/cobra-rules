@@ -103,3 +103,8 @@ InitialContext.lookup()
 ```
 Ref:
 - [realworldctf old system复盘（jdk1.4 getter jndi gadget）](https://xz.aliyun.com/t/9126)
+
+#### 数据库连接sink
+```
+java.sql.DriverManager#getConnection
+```
